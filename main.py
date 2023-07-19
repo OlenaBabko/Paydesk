@@ -36,6 +36,11 @@ main_writer.hideturtle()
 main_writer.speed(0)
 main_writer.penup()
 
+main_writer_2 = Turtle()
+main_writer_2.hideturtle()
+main_writer_2.speed(0)
+main_writer_2.penup()
+
 cell_width = SCREEN_WIDTH / COLUMN
 cell_height = (SCREEN_HEIGHT - HALL_HEADER) / ROW   # move all seats down to have space for info
 
@@ -62,6 +67,16 @@ def write_free_seats():
     free_seats = len(seats.values()) - sum(seats.values())
     main_writer.write(f"Free: {free_seats}", font=("TimesNewRoman", FONT_SIZE, "bold"))
     main_writer.penup()
+    main_screen.tracer(True)
+
+def write_booked_seats():
+    main_screen.tracer(False)
+    main_writer_2.clear()
+    main_writer_2.setposition(10, SCREEN_HEIGHT - (FONT_SIZE * 4))
+    main_writer_2.pendown()
+    booked_seats = sum(seats.values())
+    main_writer_2.write(f"Booked: {booked_seats}", font=("TimesNewRoman", FONT_SIZE, "bold"))
+    main_writer_2.penup()
     main_screen.tracer(True)
 
 # DRAW CINEMA SCREEN
@@ -112,6 +127,7 @@ for seat in seats:
 main_screen.tracer(True)
 
 write_free_seats()
+write_booked_seats()
 draw_cinema_screen()
 
 main_screen.onclick(book_seat)
