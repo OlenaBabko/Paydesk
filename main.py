@@ -120,6 +120,15 @@ def book_seat(x, y):
         draw_seat(*seat_coord, color="tomato")  # * gives order\graduality
         write_free_seats()
 
+# CANCEL BOOKING
+def unbook_seat(x, y):
+    seat_coord = get_seat(x, y)
+    if seat_coord:                              # if seat is chosen
+        seats[seat_coord] = False
+        draw_seat(*seat_coord, color="#C6C6C6")  # * gives order\graduality
+        write_free_seats()
+        write_booked_seats()
+
 # MAKES DRAWING MOMENTARY
 main_screen.tracer(False)   
 for seat in seats:
@@ -131,5 +140,6 @@ write_booked_seats()
 draw_cinema_screen()
 
 main_screen.onclick(book_seat)
+main_screen.onclick(unbook_seat, btn = 3)
 
 main_screen.mainloop()
