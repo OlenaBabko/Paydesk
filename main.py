@@ -12,16 +12,23 @@ COLUMN = 9
 main_screen = Screen()
 main_screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
 main_screen.setworldcoordinates(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
-main_screen.title("kino")
+main_screen.bgcolor("#EAEAEA")
+main_screen.title("Zhovten kino, Kyiv")
 
 # DRAWING SEATS
 main_turtle = Turtle()
 main_turtle.hideturtle()
 main_turtle.speed(0)
 main_turtle.penup()
+main_turtle.pencolor("#000000")
 
 # DRAWING CINEMA SCREEN
-
+main_turtle_0 = Turtle()
+main_turtle_0.color("black")
+main_turtle_0.hideturtle()
+main_turtle_0.pensize(3)
+main_turtle_0.speed(0)
+main_turtle_0.penup()
 
 # TEXT
 main_writer = Turtle()
@@ -58,7 +65,15 @@ def write_free_seats():
     main_screen.tracer(True)
 
 # DRAW CINEMA SCREEN
-
+def draw_cinema_screen():
+    main_screen.tracer(False)
+    r = 1155
+    main_turtle_0.up()
+    main_turtle_0.goto(50, (SCREEN_HEIGHT - (FONT_SIZE * 6))) # goto(-r/2**0.5,0) 
+    main_turtle_0.seth(-157)
+    main_turtle_0.down()
+    main_turtle_0.circle(r,-45)
+    main_screen.tracer(True)
 
 # DRAW SEAT
 def draw_seat(x, y, color="steel blue"):
@@ -97,6 +112,7 @@ for seat in seats:
 main_screen.tracer(True)
 
 write_free_seats()
+draw_cinema_screen()
 
 main_screen.onclick(book_seat)
 
