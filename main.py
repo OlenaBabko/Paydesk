@@ -51,7 +51,7 @@ y = (cell_height / 2) - seat_radius
 
 seats = {}
 
-for r in range(ROW):
+for row in range(ROW):
     for c in range(COLUMN):
         seats[(x, y)] = False                       # all seats are free 
         x += cell_width                             # move x to the next cell 
@@ -143,3 +143,20 @@ main_screen.onclick(book_seat)
 main_screen.onclick(unbook_seat, btn = 3)
 
 main_screen.mainloop()
+
+
+
+
+# EXPORT in TXT
+seats_to_save = []  
+
+for  seat, status in seats.items():
+    row_number = row - int(seat[1] // cell_height)
+    seat_number = int(seat[0] // cell_width) + 1
+    result = f"Row {row_number:02d}, seat {seat_number:02d} - {status}"
+    seats_to_save.append(result)
+seats_to_save.sort()
+
+file = open("seats.txt", "w")
+file.write('\n'.join(seats_to_save))
+file.close()
